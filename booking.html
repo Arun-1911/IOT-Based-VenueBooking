@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Venue</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-900 text-white flex flex-col min-h-screen p-6 animate__animated animate__fadeIn">
+    <div class="container mx-auto flex-grow flex flex-col justify-center items-center">
+        <div class="glass p-8 rounded-xl shadow-lg w-full max-w-lg animate__animated animate__fadeInUp">
+            <h1 class="text-2xl font-bold text-indigo-400 glowing-text mb-6 text-center animate__animated animate__pulse animate__infinite infinite">Book a Venue</h1>
+            <form method="post" class="space-y-4" id="booking-form">
+                <div class="form-group">
+                    <label for="user_id" class="form-label text-gray-300">User ID:</label>
+                    <input type="text" id="user_id" name="user_id" class="form-input text-gray-700 bg-white" required>
+                    <p class="form-validation-error" id="user_id_error"></p>
+                </div>
+                <div class="form-group">
+                    <label for="venue" class="form-label text-gray-300">Venue:</label>
+                    <select name="venue" id="venue" class="form-select text-gray-700 bg-white" required>
+                        <option value="" disabled selected class="text-gray-500">Select a Venue</option>
+                        <option value="Nethaji Auditorium" class="text-gray-700">Nethaji Auditorium</option>
+                        <option value="MG Auditorium" class="text-gray-700">MG Auditorium</option>
+                        <option value="MBA Amphitheatre" class="text-gray-700">MBA Amphitheatre</option>
+                        <option value="Kamaraj Auditorium" class="text-gray-700">Kamaraj Auditorium</option>
+                        <option value="Kastrubha Hall" class="text-gray-700">Kastrubha Hall</option>
+                        <option value="Gallery Classroom 101" class="text-gray-700">Gallery Classroom 101</option>
+                        <option value="Gallery Classroom 201" class="text-gray-700">Gallery Classroom 201</option>
+                        <option value="Gallery Classroom 301" class="text-gray-700">Gallery Classroom 301</option>
+                        <option value="Gallery Classroom 401" class="text-gray-700">Gallery Classroom 401</option>
+                        <option value="Gallery Classroom 501" class="text-gray-700">Gallery Classroom 501</option>
+                        <option value="Gallery Classroom 601" class="text-gray-700">Gallery Classroom 601</option>
+                        <option value="Gallery Classroom 701" class="text-gray-700">Gallery Classroom 701</option>
+                        <option value="Round Amphitheatre" class="text-gray-700">Round Amphitheatre</option>
+                        <option value="Cricket Ground" class="text-gray-700">Cricket Ground</option>
+                        <option value="Basketball Court" class="text-gray-700">Basketball Court</option>
+                        <option value="Tennis Court" class="text-gray-700">Tennis Court</option>
+                        <option value="Handball Court" class="text-gray-700">Handball Court</option>
+                        <option value="Football Ground" class="text-gray-700">Football Ground</option>
+                    </select>
+                    <p class="form-validation-error" id="venue_error"></p>
+                </div>
+                <div class="form-group">
+                    <label for="purpose" class="form-label text-gray-300">Purpose of Booking:</label>
+                    <textarea name="purpose" id="purpose" class="form-input text-gray-700 bg-white" rows="3" placeholder="Enter the purpose of your booking" required></textarea>
+                    <p class="form-validation-error" id="purpose_error"></p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="form-group">
+                        <label for="date_from" class="form-label text-gray-300">From Date:</label>
+                        <input type="date" name="date_from" id="date_from" class="form-input text-gray-700 bg-white" required>
+                        <p class="form-validation-error" id="date_from_error"></p>
+                    </div>
+                    <div class="form-group">
+                        <label for="date_to" class="form-label text-gray-300">To Date:</label>
+                        <input type="date" name="date_to" id="date_to" class="form-input text-gray-700 bg-white" required>
+                        <p class="form-validation-error" id="date_to_error"></p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="form-group">
+                        <label for="time_from" class="form-label text-gray-300">From Time:</label>
+                        <input type="time" name="time_from" id="time_from" class="form-input text-gray-700 bg-white" required>
+                        <p class="form-validation-error" id="time_from_error"></p>
+                    </div>
+                    <div class="form-group">
+                        <label for="time_to" class="form-label text-gray-300">To Time:</label>
+                        <input type="time" name="time_to" id="time_to" class="form-input text-gray-700 bg-white" required>
+                        <p class="form-validation-error" id="time_to_error"></p>
+                    </div>
+                </div>
+                <button type="submit" class="form-button w-full inline-flex items-center justify-center animate__animated animate__fadeInUp animate__delay-1s">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                    Book Venue
+                </button>
+
+                <div class="mt-4 text-center text-gray-300 animate__animated animate__fadeInUp animate__delay-1.2s" id="form-validation-messages">
+                    </div>
+            </form>
+
+            <div class="mt-6 text-center space-x-4 animate__animated animate__fadeInUp animate__delay-1.5s">
+                <a href="/view_bookings" class="text-indigo-400 hover:underline inline-flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
+                    </svg>
+                    View Booked Venues
+                </a>
+                <a href="/" class="text-gray-400 hover:underline inline-flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                    </svg>
+                    Go Back
+                </a>
+            </div>
+
+            <h2 class="text-xl font-bold text-gray-400 mt-8 text-center animate__animated animate__fadeInUp animate__delay-2s">All Bookings</h2>
+            <div class="overflow-x-auto animate__animated animate__fadeInUp animate__delay-2.2s">
+                <table class="booking-table">
+                    <thead>
+                        <tr>
+                            <th>User</th>
+                            <th>Venue</th>
+                            <th>Purpose</th>
+                            <th>Date From</th>
+                            <th>Date To</th>
+                            <th>Time From</th>
+                            <th>Time To</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for b in bookings %}
+                        <tr>
+                            <td class="text-gray-300">{{ b.user }}</td>
+                            <td class="text-gray-300">{{ b.venue }}</td>
+                            <td class="text-gray-300">{{ b.purpose }}</td>
+                            <td class="text-gray-300">{{ b.date_from }}</td>
+                            <td class="text-gray-300">{{ b.date_to }}</td>
+                            <td class="text-gray-300">{{ b.time_from }}</td>
+                            <td class="text-gray-300">{{ b.time_to }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <a href="tel:+918220127847" class="fixed bottom-8 right-8 bg-green-500 text-white p-3 rounded-full shadow-md font-bold hover:bg-green-600 transition duration-300 ease-in-out z-10 animate__animated animate__fadeIn animate__delay-2.5s">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 inline-block mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1c-1.001 0-1.948-.52-2.51-1.49A12.029 12.029 0 0012 12c-.003-.21-.008-.42-.013-.633z" />
+        </svg>
+        Help Desk
+    </a>
+    <footer class="bg-gray-800 text-gray-300 py-4 text-center mt-8 animate__animated animate__fadeInUp animate__delay-2.8s">
+        <p class="text-sm">&copy; 2025 Venue Booking</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('booking-form');
+            const userIdInput = document.getElementById('user_id');
+            const venueSelect = document.getElementById('venue');
+            const purposeTextarea = document.getElementById('purpose');
+            const dateFromInput = document.getElementById('date_from');
+            const dateToInput = document.getElementById('date_to');
+            const timeFromInput = document.getElementById('time_from');
+            const timeToInput = document.getElementById('time_to');
+            const validationMessagesDiv = document.getElementById('form-validation-messages');
+            const errorElements = {
+                user_id: document.getElementById('user_id_error'),
+                venue: document.getElementById('venue_error'),
+                purpose: document.getElementById('purpose_error'),
+                date_from: document.getElementById('date_from_error'),
+                date_to: document.getElementById('date_to_error'),
+                time_from: document.getElementById('time_from_error'),
+                time_to: document.getElementById('time_to_error')
+            };
+
+            form.addEventListener('submit', function(event) {
+                let isValid = true;
+                validationMessagesDiv.innerHTML = '';
+
+                for (const key in errorElements) {
+                    errorElements[key].textContent = '';
+                }
+
+                if (!userIdInput.value.trim()) {
+                    errorElements.user_id.textContent = 'Please enter your User ID.';
+                    isValid = false;
+                }
+
+                if (!venueSelect.value) {
+                    errorElements.venue.textContent = 'Please select a venue.';
+                    isValid = false;
+                }
+
+                if (!purposeTextarea.value.trim()) {
+                    errorElements.purpose.textContent = 'Please enter the purpose of booking.';
+                    isValid = false;
+                }
+
+                if (!dateFromInput.value) {
+                    errorElements.date_from.textContent = 'Please select a start date.';
+                    isValid = false;
+                }
+
+                if (!dateToInput.value) {
+                    errorElements.date_to.textContent = 'Please select an end date.';
+                    isValid = false;
+                }
+
+                if (!timeFromInput.value) {
+                    errorElements.time_from.textContent = 'Please select a start time.';
+                    isValid = false;
+                }
+
+                if (!timeToInput.value) {
+                    errorElements.time_to.textContent = 'Please select an end time.';
+                    isValid = false;
+                }
+
+                if (!isValid) {
+                    event.preventDefault();
+                    return;
+                }
+
+                if (new Date(dateFromInput.value + 'T' + timeFromInput.value) >= new Date(dateToInput.value + 'T' + timeToInput.value)) {
+                    validationMessagesDiv.textContent = 'The start date and time must be before the end date and time.';
+                    isValid = false;
+                    event.preventDefault();
+                    return;
+                }
+            });
+        });
+    </script>
+</body>
+</html>

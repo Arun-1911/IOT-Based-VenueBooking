@@ -1,0 +1,172 @@
+:root {
+    --background-color: #000000; /* Black background */
+    --box-background: #ffffff; /* White boxes */
+    --title-color: #ffffff; /* White titles */
+    --text-color: #000000; /* Black text (inside white boxes) */
+    --accent-color: #cccccc; /* Light gray accent */
+    --button-background: #333333; /* Dark gray button */
+    --button-text: #ffffff; /* White button text */
+    --button-hover-background: #555555; /* Lighter gray button hover */
+    --border-color: #dddddd; /* Light gray border for boxes */
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color); /* Default body text is black, might be overridden by box context */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.container {
+    flex-grow: 1;
+    padding: 2rem;
+}
+
+/* Style for main content boxes */
+.glass, .form-group, table, .form-button, .back-button, footer {
+    background-color: var(--box-background);
+    color: var(--text-color); /* Black text inside these elements */
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Ensure container doesn't get the white background */
+.container {
+    background-color: transparent;
+    border: none;
+    padding: 2rem;
+}
+
+/* Style for headings (titles) */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--title-color); /* White titles */
+}
+
+/* Style for links */
+a {
+    color: var(--accent-color);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Style for form elements */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="date"],
+input[type="time"],
+select,
+textarea {
+    background-color: var(--box-background);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border-radius: 0.25rem;
+    box-sizing: border-box;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="date"]:focus,
+input[type="time"]:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 0.1rem var(--accent-color);
+}
+
+/* Style for buttons */
+button,
+input[type="submit"],
+input[type="reset"] {
+    background-color: var(--button-background);
+    color: var(--button-text);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+button:hover,
+input[type="submit"]:hover,
+input[type="reset"]:hover {
+    background-color: var(--button-hover-background);
+}
+
+/* Style for tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+th, td {
+    padding: 0.75rem;
+    border-bottom: 1px solid var(--border-color);
+    text-align: left;
+}
+
+th {
+    font-weight: bold;
+    color: var(--title-color); /* White table header text */
+    background-color: #222222; /* Darker background for header */
+}
+
+/* Style for footers */
+footer {
+    background-color: var(--box-background);
+    color: var(--text-color-secondary); /* Light gray footer text */
+    padding: 1rem;
+    text-align: center;
+    margin-top: 2rem;
+    border-top: 1px solid var(--border-color); /* Add a top border to separate from content */
+}
+
+/* Specific style for the "glowing text" (now white) */
+.glowing-text {
+    color: var(--title-color); /* Ensure text is white */
+    text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff;
+}
+
+/* Style for validation error messages */
+.form-validation-error {
+    color: #ff4d4d; /* Red error text */
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+/* Style adjustments for specific elements in booking.html */
+.form-select option {
+    background-color: var(--box-background);
+    color: var(--text-color);
+}
+
+.form-select option:hover {
+    background-color: #f0f0f0; /* Slightly darker white on hover */
+}
+
+.back-button {
+    background-color: var(--box-background);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.back-button:hover {
+    background-color: #f0f0f0;
+    color: var(--text-color);
+    border-color: var(--accent-color);
+}

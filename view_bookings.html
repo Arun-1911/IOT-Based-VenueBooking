@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Bookings</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-900 text-white flex flex-col min-h-screen p-6 animate__animated animate__fadeIn">
+    <div class="container mx-auto flex-grow flex flex-col justify-center items-center">
+        <div class="glass p-8 rounded-xl shadow-lg w-full max-w-md animate__animated animate__fadeInUp">
+            <h1 class="text-2xl font-bold text-indigo-400 glowing-text mb-6 text-center animate__animated animate__pulse animate__infinite infinite">Your Booked Venues</h1>
+            <div class="overflow-x-auto">
+                <table class="booking-table">
+                    <thead>
+                        <tr>
+                            <th>Venue</th>
+                            <th>Date From</th>
+                            <th>Date To</th>
+                            <th>Time From</th>
+                            <th>Time To</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for b in user_bookings %}
+                        <tr>
+                            <td class="text-gray-300">{{ b.venue }}</td>
+                            <td class="text-gray-300">{{ b.date_from }}</td>
+                            <td class="text-gray-300">{{ b.date_to }}</td>
+                            <td class="text-gray-300">{{ b.time_from }}</td>
+                            <td class="text-gray-300">{{ b.time_to }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="mt-6 text-center space-x-4 animate__animated animate__fadeInUp animate__delay-1s">
+                <a href="/live_count" class="form-button inline-flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13l-3 3m0 0l-3-3m3 3V8m0 13a9 9 0 110-18 9 9 0 010 18z" />
+                    </svg>
+                    Live Count
+                </a>
+                <a href="/booking" class="form-button inline-flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                    Book More
+                </a>
+                <a href="/" class="text-gray-400 hover:underline inline-flex items-center animate__animated animate__fadeInUp animate__delay-1.2s">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                    </svg>
+                    Go Back
+                </a>
+            </div>
+        </div>
+    </div>
+    <footer class="bg-gray-800 text-gray-300 py-4 text-center mt-8 animate__animated animate__fadeInUp animate__delay-1.5s">
+        <p class="text-sm">&copy; 2025 Venue Booking</p>
+    </footer>
+</body>
+</html>

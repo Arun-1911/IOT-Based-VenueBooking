@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-900 text-white flex flex-col min-h-screen justify-center items-center p-6 animate__animated animate__fadeIn">
+    <div class="glass p-8 rounded-xl shadow-lg w-full max-w-md animate__animated animate__fadeInUp">
+        <h1 class="text-2xl font-bold text-indigo-400 glowing-text mb-6 text-center animate__animated animate__pulse animate__infinite infinite">Login</h1>
+        <form method="post" class="space-y-4">
+            <div class="form-group animate__animated animate__fadeInUp animate__delay-1s">
+                <label for="username" class="form-label">Username:</label>
+                <input type="text" id="username" name="username" class="form-input">
+            </div>
+            <div class="form-group animate__animated animate__fadeInUp animate__delay-1.5s">
+                <label for="password" class="form-label">Password:</label>
+                <input type="password" id="password" name="password" class="form-input">
+            </div>
+            <button type="submit" class="form-button w-full animate__animated animate__fadeInUp animate__delay-2s">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h13a3 3 0 013 3v1" />
+                </svg>
+                Login
+            </button>
+        </form>
+        <div class="mt-4 text-center space-x-4 animate__animated animate__fadeInUp animate__delay-2.5s">
+            <a href="/forgot" class="text-sm text-indigo-400 hover:underline">Forgot Password?</a>
+            <a href="/" class="text-sm text-gray-400 hover:underline">Go Back</a>
+        </div>
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <ul class="mt-4 space-y-2 animate__animated animate__fadeInUp animate__delay-3s">{% for message in messages %}
+                <li class="notification-error">{{ message }}</li>
+            {% endfor %}</ul>
+          {% endif %}
+        {% endwith %}
+    </div>
+    <footer class="bg-gray-800 text-gray-300 py-4 text-center mt-8 animate__animated animate__fadeInUp animate__delay-3.5s">
+        <p class="text-sm">&copy; 2025 Venue Booking</p>
+    </footer>
+</body>
+</html>
